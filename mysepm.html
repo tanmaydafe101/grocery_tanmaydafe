@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Shop</title>
+    
+        <style>
+            
+            /* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    background-attachment: fixed;
+    color: #333;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+/* Search Bar */
+.search-bar input[type="text"] {
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    max-width: 450px;
+    font-size: 1rem;
+}
+
+/* Category Section */
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 25px 15px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.category {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.category:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 117, 140, 0.4);
+}
+
+/* Section Styling (Fruits, Dairy, Home, etc.) */
+.section {
+    display: none;
+    background: white;
+    margin: 30px auto;
+    padding: 40px 25px;
+    max-width: 1200px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    animation: fadeIn 0.6s ease;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Product Items */
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.item {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 180px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.item p {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+.item p:last-child {
+    font-weight: bold;
+    color: #ff6600;
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    background-color: #ff6b6b;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.add-to-cart:hover {
+    background-color: #ff4c4c;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(to right, #3a3a5a, #2b2b45);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 14px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+          
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f8f9fa;
+            }
+    
+            header {
+                background: linear-gradient(to right, #ff758c, #ff7eb3);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 30px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                animation: slideDown 1s ease;
+                position: relative;
+            }
+    
+            @keyframes slideDown {
+                from { transform: translateY(-100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+    
+              .theme-toggle {
+                position: absolute;
+                top: 20px;
+                right: 115px;
+                left: 1100px;;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+            }
+    
+            .theme-toggle input[type="checkbox"] {
+                appearance: none;
+                width: 40px;
+                height: 20px;
+                background: white;
+                border-radius: 20px;
+                position: relative;
+                outline: none;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+    
+            .theme-toggle input[type="checkbox"]::before {
+                content: '';
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                top: 1px;
+                left: 1px;
+                background: #ff758c;
+                border-radius: 50%;
+                transition: transform 0.3s ease;
+            } 
+    
+            .theme-toggle input[type="checkbox"]:checked::before {
+                transform: translateX(20px);
+            } 
+    
+            .search-bar input[type="text"] {
+                padding: 8px;
+                border-radius: 20px;
+                margin-left: 80px; 
+                border: none;
+                width: 475px;
+            }
+    
+            .profile-menu button {
+                background: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 30px;
+                cursor: pointer;
+                font-weight: bold;
+                color: #ff758c;
+                transition: background 0.3s;
+            }
+    
+            .profile-menu button:hover {
+                background: #ffe3ea;
+            }
+    
+            .dropdown {
+                display: none;
+                position: absolute;
+                right: 0;
+                top: 45px;
+                background: white;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                border-radius: 10px;
+                width: 150px;
+                z-index: 10;
+                animation: fadeIn 0.3s ease;
+            }
+    
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+    
+            .dropdown a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: black;
+                transition: background 0.3s;
+            }
+    
+            .dropdown a:hover {
+                background: #f0f0f0;
+            }
+    
+            .profile-menu:hover .dropdown {
+                display: block;
+            }
+    
+            .categories {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                animation: fadeIn 1s ease;
+            }
+    
+            .category {
+                padding: 12px 25px;
+                background: linear-gradient(135deg, #ff758c, #ff7eb3);
+                color: white;
+                border-radius: 30px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+    
+            .category:hover {
+                transform: scale(1.1);
+                box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            }
+    
+            .section {
+                display: none;
+                text-align: center;
+                padding: 30px 15px;
+                animation: fadeIn 0.5s ease;
+            }
+    
+            .item-list {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                gap: 20px;
+                padding: 20px;
+                scroll-behavior: smooth;
+            }
+    
+            .item {
+                background: white;
+                padding: 15px;
+                border-radius: 15px;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+                text-align: center;
+                width: 160px;
+                flex: 0 0 auto;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                animation: fadeIn 0.5s ease-in-out;
+            }
+    
+            .item:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            }
+    
+            .item img {
+                width: 100px;
+                height: 100px;
+                border-radius: 10px;
+                object-fit: cover;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+    
+            .item img:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            }
+    
+            .item p:last-child {
+                color: #ff6600;
+                font-weight: bold;
+                font-size: 16px;
+            }
+    
+            footer {
+                text-align: center;
+                padding: 15px;
+                background: #343a40;
+                color: white;
+                margin-top: 20px;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+    
+            body.bard-theme {
+                background-color: #1e1e2f;
+                color: white;
+            }
+    
+            body.bard-theme header {
+                background: linear-gradient(to right, #3a3a5a, #2b2b45);
+                color: white;
+            }
+    
+            body.bard-theme .profile-menu button {
+                background: #2b2b45;
+                color: white;
+            }
+    
+            body.bard-theme .profile-menu button:hover {
+                background: #444460;
+            }
+    
+            body.bard-theme .dropdown {
+                background: #2e2e42;
+                color: white;
+            }
+    
+            body.bard-theme .dropdown a {
+                color: white;
+            }
+    
+            body.bard-theme .dropdown a:hover {
+                background: #3a3a55;
+            }
+    
+            body.bard-theme .categories {
+                background: #2c2c40;
+            }
+    
+            body.bard-theme .category {
+                background: linear-gradient(135deg, #444466, #555577);
+            }
+    
+            body.bard-theme .item {
+                background: #2f2f45;
+                color: white;
+            }
+    
+            body.bard-theme .item p:last-child {
+                color: #ffa94d;
+            }
+    
+            body.bard-theme footer {
+                background: #1c1c2c;
+            }
+    
+            #suggestionsList li {
+                padding: 8px 16px;
+                cursor: pointer;
+                transition: background-color 0.2s ease-in-out;
+            }
+    
+            #suggestionsList li:hover {
+                background-color: #e0f2fe;
+            }
+    
+            #suggestionsList {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+        */ add card code */
+            .top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 10px;
+}
+
+#cart-button {
+  background-color: #77f86e;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: -125px; 
+  transition: background-color 0.3s ease;
+}
+
+#cart-button:hover {
+  background-color: #55ff5d;
+}
+.product-category {
+  margin-bottom: 2rem;
+}
+
+.product {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(220, 203, 203, 0.1);
+  text-align: center;
+  margin: 10px;
+  display: inline-block;
+  width: 300px;
+}
+
+.product img {
+  width: 200%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.add-to-cart {
+  margin-top: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-to-cart:hover {
+  background-color: #ff4c4c;
+}
+/* Body with soft neutral base */
+body {
+  background: #fff0f5;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+/* Header - prime pink */
+header {
+  background-color: #ff4d6d;
+  color: white;
+}
+
+/* Category Buttons */
+.category {
+  background-color: #ff4d6d;
+  color: white;
+}
+.category:hover {
+  background-color: #e94361;
+}
+
+/* Section background */
+.section {
+  background-color: #ffe6eb;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 77, 109, 0.1);
+  padding: 40px;
+  margin: 30px auto;
+  max-width: 1200px;
+}
+
+/* Cards */
+.item {
+  background-color: #ffffff;
+  border: 1px solid #ffc2cd;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(255, 77, 109, 0.1);
+  padding: 15px;
+}
+.item:hover {
+  box-shadow: 0 6px 24px rgba(255, 77, 109, 0.2);
+}
+
+/* Buttons */
+.add-to-cart {
+  background-color: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.add-to-cart:hover {
+  background-color: #e94361;
+}
+
+/* Footer */
+footer {
+  background-color: #ff4d6d;
+  color: white;
+  padding: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+
+        </style>
+</head>
+<body>
+    <header>
+        <div>Mini Grocery</div>
+        <div class="search-bar relative w-full max-w-md">
+            <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for products..." class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow">
+            <ul id="suggestionsList" class="absolute z-10 w-full bg-white border mt-1 rounded-xl shadow-lg hidden max-h-60 overflow-y-auto"></ul>
+        </div>
+        <div class="theme-toggle">
+            <label for="themeSwitch">Dark Mode</label>
+            <input type="checkbox" id="themeSwitch">
+        </div>
+        <div class="top-bar">
+            <!-- Theme Toggle
+            <label class="theme-switch">
+              <input type="checkbox" id="theme-toggle">
+              <span class="slider"></span>
+            </label> -->
+          
+            <!-- Cart Button -->
+            <button id="cart-button">
+              🛒 Cart (<span id="cart-count">0</span>)
+            </button>
+          </div>
+          
+        <div class="profile-menu">
+            <button>Profile</button>
+            <div class="dropdown">
+                <a href="#" onclick="showRole('User')">User</a>
+                <a href="#" onclick="showRole('Administrator')">Administrator</a>
+                <a href="#" onclick="showRole('Employee')">Employee</a>
+            </div>
+        </div>
+    </header>
+    <div class="section" id="home" style="display: block;">
+        <h2 style="font-size: 2.8rem; background: linear-gradient(to right, #ff758c, #ff7eb3); -webkit-background-clip: text; color: transparent; font-weight: 800; margin-bottom: 10px;">
+          Welcome to Mini Grocery
+        </h2>
+        <p style="font-size: 1.2rem; color: #555; max-width: 700px; margin: 0 auto;">
+          Your one-stop destination for the freshest fruits, crispy vegetables, creamy dairy, and delicious snacks!
+        </p>
+        <img
+          src="home.jpg"
+          alt="Grocery Banner"
+          style="width: 90%; max-width: 850px; border-radius: 20px; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.03)'"
+          onmouseout="this.style.transform='scale(1)'"
+        >
+      </div>
+      
+    <div class="categories">
+        <div class="category" onclick="showCategory('fruits')">Fruits</div>
+        <div class="category" onclick="showCategory('vegetables')">Vegetables</div>
+        <div class="category" onclick="showCategory('dairy')">Dairy</div>
+        <div class="category" onclick="showCategory('beverages')">Beverages</div>
+        <div class="category" onclick="showCategory('snacks')">Snacks</div>
+    </div>
+    
+    <div class="section" id="fruits">
+        <h2>Fruits</h2>
+        <div class="item-list">
+            <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple"><p>Apple - $2</p></div>
+                <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana"><p>Banana - $1</p></div>
+                <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg" alt="Orange"><p>Orange - $3</p></div>
+                <div class="item"><img src="Grapes.jpg" alt="Grapes"><p>Grapes - $4</p></div>
+                <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg" alt="Pineapple"><p>Pineapple - $5</p></div>
+                <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg" alt="Mango"><p>Mango - $6</p></div>
+                <div class="item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg" alt="Strawberry"><p>Strawberry - $7</p></div>
+                <div class="item"><img src="Watermelon.jpg" alt="Watermelon"><p>Watermelon - $8</p></div>
+                <div class="item"><img src="Papaya1.jpg" alt="Papaya"><p>Papaya - $4</p></div>
+                <div class="item"><img src="peach.jpg" alt="Peach"><p>Peach - $3</p></div>    
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+    </div>
+    <div class="section" id="vegetables">
+        <h2>Vegetables</h2>
+        <div class="item-list">
+            <div class="item"><img src="Spinach.jpg" alt="Spinach"><p>Spinach - $1</p></div>
+            <div class="item"><img src="Cabbage.jpg" alt="Cabbage"><p>Cabbage - $1.5</p></div>
+            <div class="item"><img src="Tinda.jpg" alt="Tinda"><p>Tinda - $1.2</p></div>
+            <div class="item"><img src="Carrot.jpg" alt="Carrot"><p>Carrot - $2</p></div>
+            <div class="item"><img src="Radish.jpg" alt="Radish"><p>Radish - $1</p></div>
+            <div class="item"><img src="Tomato.jpg" alt="Tomato"><p>Tomato - $1.8</p></div>
+            <div class="item"><img src="Brinjal.jpg" alt="Brinjal"><p>Brinjal - $2</p></div>
+            <div class="item"><img src="Bottle gourd.jpg" alt="Bottle gourd"><p>Bottle gourd - $1.5</p></div>
+            <div class="item"><img src="Potato.jpg" alt="Potato"><p>Potato - $1</p></div>
+            <div class="item"><img src="Onion.jpg" alt="Onion"><p>Onion - $1.3</p></div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    
+    
+    <div class="section" id="dairy">
+        <h2>Dairy Products</h2>
+        <div class="item-list">
+            <div class="item"><img src="Milk.jpg" alt="Milk"><p>Milk - $0.8</p></div>
+            <div class="item"><img src="Curd.jpg" alt="Curd"><p>Curd - $1.0</p></div>
+            <div class="item"><img src="Paneer.jpg" alt="Paneer"><p>Paneer - $2.5</p></div>
+            <div class="item"><img src="Butter.jpg" alt="Butter"><p>Butter - $2.0</p></div>
+            <div class="item"><img src="Ghee.jpg" alt="Ghee"><p>Ghee - $3.5</p></div>
+            <div class="item"><img src="Cheese.jpg" alt="Cheese"><p>Cheese - $2.8</p></div>
+            <div class="item"><img src="Fresh Cream.jpg" alt="Cream"><p>Fresh Cream - $1.5</p></div>
+            <div class="item"><img src="Lassi.jpg" alt="Lassi"><p>Lassi - $0.7</p></div>
+            <div class="item"><img src="Buttermilk.jpg" alt="Buttermilk"><p>Buttermilk - $0.6</p></div>
+            <div class="item"><img src="Milk Powder.jpg" alt="Milk Powder"><p>Milk Powder - $2.0</p></div>
+            <button class="add-to-cart">Add to Cart</button>    
+        </div>
+    </div>
+    <div class="section" id="beverages">
+        <h2>Beverages</h2>
+        <div class="item-list">
+            <div class="item"><img src="Tea.jpg" alt="Tea"><p>Tea - $0.5</p></div>
+            <div class="item"><img src="Coffee.jpg" alt="Coffee"><p>Coffee - $0.8</p></div>
+            <div class="item"><img src="Cold Coffee.jpg" alt="Cold Coffee"><p>Cold Coffee - $1.2</p></div>
+            <div class="item"><img src="Lassi.jpg" alt="Lassi"><p>Lassi - $0.7</p></div>
+            <div class="item"><img src="Buttermilk.jpg" alt="Buttermilk"><p>Buttermilk - $0.6</p></div>
+            <div class="item"><img src="Fruit Juice.jpg" alt="Juice"><p>Fruit Juice - $1.5</p></div>
+            <div class="item"><img src="Coconut Water.jpg" alt="Coconut Water"><p>Coconut Water - $1.0</p></div>
+            <div class="item"><img src="Energy Drink.jpg" alt="Energy Drink"><p>Energy Drink - $2.0</p></div>
+            <div class="item"><img src="Soda.jpg" alt="Soda"><p>Soda - $0.9</p></div>
+            <div class="item"><img src="Milkshake.jpg" alt="Milkshake"><p>Milkshake - $1.8</p></div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    <div class="section" id="snacks">
+        <h2>Snacks</h2>
+        <div class="item-list">
+            <div class="item"><img src="Samosa.jpg" alt="Samosa"><p>Samosa - $0.5</p></div>
+            <div class="item"><img src="Kachori.jpg" alt="Kachori"><p>Kachori - $0.6</p></div>
+            <div class="item"><img src="Pakora.jpg" alt="Pakora"><p>Pakora - $0.7</p></div>
+            <div class="item"><img src="Vada Pav.jpg" alt="Vada Pav"><p>Vada Pav - $0.8</p></div>
+            <div class="item"><img src="Bhajiya.jpg" alt="Bhajiya"><p>Bhajiya - $0.6</p></div>
+            <div class="item"><img src="Pav Bhaji.jpg" alt="Pav Bhaji"><p>Pav Bhaji - $1.5</p></div>
+            <div class="item"><img src="Bhel Puri.jpg" alt="Bhel Puri"><p>Bhel Puri - $1.0</p></div>
+            <div class="item"><img src="Sev Puri.jpg" alt="Sev Puri"><p>Sev Puri - $1.0</p></div>
+            <div class="item"><img src="Sandwich.jpg" alt="Sandwich"><p>Sandwich - $1.2</p></div>
+            <div class="item"><img src="Potato Chips.jpg" alt="Chips"><p>Potato Chips - $0.9</p></div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    
+    
+    
+        
+    
+    <footer id="animatedFooter" class="fade-up">
+        <div class="footer-content">
+          <div class="left">© <span id="currentYear"></span> Mr. Tanmay Dafe. All Rights Reserved.</div>
+          <div class="right" id="datetime"></div>
+        </div>
+      </footer>
+    
+    <script>
+        let cartCount = 0;
+
+// Select all "Add to Cart" buttons for items
+const addToCartButtons = document.querySelectorAll(".add-to-cart");
+const cartCountSpan = document.getElementById("cart-count");
+
+addToCartButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    cartCount++;
+    cartCountSpan.textContent = cartCount;
+  });
+});
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.theme-toggle input[type="checkbox"]');
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('bard-theme');
+        });
+    });
+        
+       function showRole(role) {
+            alert("Selected Role: " + role);
+        }
+
+        function showCategory(category) {
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(category).style.display = 'block';
+        }
+
+        const allItems = [
+            "Apple", "Banana", "Orange", "Grapes", "Pineapple", "Mango", "Strawberry", "Watermelon", "Papaya", "Peach",
+            "Spinach", "Cabbage", "Tinda", "Carrot", "Radish", "Tomato", "Brinjal", "Bottle gourd", "Potato", "Onion",
+            "Milk", "Curd", "Paneer", "Butter", "Ghee", "Cheese", "Fresh Cream", "Lassi", "Buttermilk", "Milk Powder",
+            "Tea", "Coffee", "Cold Coffee", "Fruit Juice", "Coconut Water", "Energy Drink", "Soda", "Milkshake",
+            "Samosa", "Kachori", "Pakora", "Vada Pav", "Bhajiya", "Pav Bhaji", "Bhel Puri", "Sev Puri", "Sandwich", "Potato Chips"
+        ];
+
+        function filterItems() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const list = document.getElementById("suggestionsList");
+
+            list.innerHTML = "";
+            if (filter === "") {
+                list.classList.add("hidden");
+                return;
+            }
+
+            const filteredItems = allItems.filter(item => item.toLowerCase().includes(filter));
+
+            if (filteredItems.length === 0) {
+                list.classList.add("hidden");
+                return;
+            }
+
+            filteredItems.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                li.className = "px-4 py-2 hover:bg-blue-100 cursor-pointer";
+                li.onclick = () => {
+                    input.value = item;
+                    list.classList.add("hidden");
+                };
+                list.appendChild(li);
+            });
+
+            list.classList.remove("hidden");
+        }
+
+        document.addEventListener("click", function (e) {
+            const list = document.getElementById("suggestionsList");
+            const input = document.getElementById("searchInput");
+            if (!input.contains(e.target) && !list.contains(e.target)) {
+                list.classList.add("hidden");
+            }
+        });
+         // Set Year
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+// Live Date & Time
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        weekday: 'short', year: 'numeric', month: 'short', 
+        day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
+    };
+    document.getElementById("datetime").textContent = now.toLocaleDateString("en-IN", options);
+}
+setInterval(updateDateTime, 1000);
+updateDateTime(); // Initial call
+
+// Animation trigger
+const footer = document.getElementById("animatedFooter");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            footer.classList.add("visible");
+        }
+    });
+});
+observer.observe(footer);
+</script>
+
+<style>
+footer {
+    background: linear-gradient(to right, #3a3a5a, #2b2b45);
+    color: white;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease-in-out;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    letter-spacing: 0.5px;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-content .left,
+.footer-content .right {
+    margin: 4px 0;
+}
+
+.footer-content .right {
+    font-size: 13px;
+    font-style: italic;
+    color: #ffa94d;
+}
+
+@media (max-width: 500px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+    </script>
+</body>
+</html>

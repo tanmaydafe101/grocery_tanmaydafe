@@ -1,0 +1,98 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperlinks Demo</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            color: white;
+        }
+        h1, h2, p {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #ff5733;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        a:hover {
+            background-color: #c70039;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Hyperlinks Practical by Student</h1>
+    
+    <h2>1. Navigation from One Page to Another</h2>
+    <p>Click below to navigate to Google:</p>
+    <a href="https://www.google.com" target="_blank">Go to Google</a>
+    
+    <h2>2. Navigation Within the Same Page</h2>
+    <p>Click below to jump to Section 2:</p>
+    <a href="#section2">Go to Section 2</a>
+    
+    <p style="margin-top: 1000px; font-size: 26px; font-weight: bold;" id="section2">You are now in Section 2.</p>
+    <a href="#top">Back to Top</a>
+</body>
+</html>
+
+<!-- page2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            color: white;
+        }
+        h1, p {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        a {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #1e90ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        a:hover {
+            background-color: #0b6ab7;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Page 2</h1>
+    <p>This is the second page created by a student.</p>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>
